@@ -48,14 +48,15 @@ def get_text(url):
     except Exception as e:
         print "May not retrieve {}. \nException: {}.".format(url, e)
         # return [""]
-    if f == "":
+    if f == "" or f == None:
         return [""]
     soup = BeautifulSoup(f, "html.parser", from_encoding="utf-8")
     # soup = soup.find("body")
     for script in soup(["script", "style", "sup"]):
         script.extract()
     for script in soup.find_all('span'):
-        script.string = ". " + script.get_tex() + "."
+        if script != None:
+            script.string = ". " + script.get_tex() + "."
     text = soup.get_text()
     lines = (line.strip() for line in text.splitlines())
     chunks = (phrase.strip() for line in lines for phrase in line.split(" "))
