@@ -42,13 +42,17 @@ def get_text(url):
     :param url: str
     :return: a list of a str of the text
     '''
+    f = ""
     try:
         f = urllib2.urlopen(url).read()
     except Exception as e:
-        print "Could not retrieve {}. \nError: {}.".format(url, e)
+        print "May not retrieve {}. \nException: {}.".format(url, e)
+        # return [""]
+    if f == "":
         return [""]
     soup = BeautifulSoup(f, "html.parser", from_encoding="utf-8")
-    for script in soup(["script", "style"]):
+    # soup = soup.find("body")
+    for script in soup(["script", "style", "sup"]):
         script.extract()
     text = soup.get_text()
     lines = (line.strip() for line in text.splitlines())
