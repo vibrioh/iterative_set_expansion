@@ -52,7 +52,7 @@ def get_text(url):
         return [""]
     soup = BeautifulSoup(f, "html.parser", from_encoding="utf-8")
     # soup = soup.find("body")
-    for script in soup(["script", "style", "sup"]):
+    for script in soup(["script", "style"]):
         script.extract()
     for script in soup.find_all('span'):
         if script != None:
