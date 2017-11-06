@@ -54,10 +54,12 @@ def get_text(url):
     # soup = soup.find("body")
     for script in soup(["script", "style", "sup"]):
         script.extract()
+    for script in soup.find_all('span'):
+        script.string = ". " + script.get_tex() + "."
     text = soup.get_text()
     lines = (line.strip() for line in text.splitlines())
     chunks = (phrase.strip() for line in lines for phrase in line.split(" "))
-    return [" ".join(chunk for chunk in chunks if (chunk and len(str(chunk)) < 23)) if text else ""]
+    return [" ".join(chunk for chunk in chunks if (chunk and len(str(chunk)) < 18)) if text else ""]
 
 
 def annotate(text, properties_step):
@@ -106,7 +108,7 @@ def senteces_filter(doc):
     for sentence in doc.sentences:
         entities = defaultdict(int)
         tokens = sentence.tokens
-        if len(tokens) > 50:
+        if len(tokens) > 43:
             continue
         for token in tokens:
             if token.ner != "O":
