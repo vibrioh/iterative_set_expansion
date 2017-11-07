@@ -1,8 +1,3 @@
-# Project 2 Group 35
-## Member
-Peng Guo -- pg2539
-
-Jun Hu -- jh3846
 ## Files
 Name | Usage
 --- | ---
@@ -67,9 +62,3 @@ python iterative_set_expansion.py AIzaSyA_h1kXl0JIC4d2RAkeq-VRWMTbVOijrwA 015239
 * Then the `senteces_filter(doc)` will be invoked to get rid of impossible sentences for relation extraction. For the time-efficiency trade-off, we first cut off sentences longer than 50. Then delete the sentences that don't contain entities for the required relation. At the end return the filtered sentences list.
 * The second step, `annotate(text, properties_step)` takes the filtered sentences. By indicating the properties_step argument = 2, we are now using the annotators *"tokenize,ssplit,pos,lemma,ner,parse,relation"*. By this round, the relations are embedded within annotated document.
 4. Then `extract_r(sentence, X)` is used to extract relations. The valid relations are those with the right entities and the confidences are the highest among all other relations in the same parse tree. Because we use dictionary to store tuples, so it is easy to check the duplicates for both keys and values. These relations are all added to X as long as they are not identical to the previous. And after one iteration, they will be further pruned by prerequisite confidence.
-
-## KEY and ID
-Type | String
---- | ---
-Google API KEY | AIzaSyA_h1kXl0JIC4d2RAkeq-VRWMTbVOijrwA
-Google Engine ID | 015239954879085458485:jvjbixbxjiu
